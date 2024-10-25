@@ -9,7 +9,14 @@
 quando a usuaria introduza o numero no input e clickar no botao:
    
     - recolher essa informação
-        - se o campo estiver vazio
+3-->
+    Elementos: Input da usuaria, campo da pista
+        - se, o numero da usuaria for menor que 1 ou maior que 100: mostrar a mensagem "El número debe de estar entre 1 y 100", no campo Pista;
+        - se, o numero da usuaria (numberInput) for > que o numero aleatorio: mostrar mensagem "Demasiado alto"
+        - se, o numero da usuaria (numberInput) for < que o numero aleatorio: mostrar mensagem "Demasiado bajo"
+        - se, o numero da usuaria (numberInput) for = ao numero aleatorio: mostrar mensagem "Has ganado campeona"
+        
+
 
 
 */
@@ -25,17 +32,36 @@ console.log(randomNumber);
 
 const numberInput = document.querySelector(".js-number");
 const tryButton = document.querySelector(".js-button");
+const result = document.querySelector(".js-tips");
 
-const userNumber = () => {
+function checkNumber () {
     //recolher o numero que a usuaria coloca no numberInput
-    const getNumber = numberInput.value; 
+    const userNumber = numberInput.value; 
+    //console.log(userNumber);
+
+    //si es numero < 1 o > 100
+
+    if (userNumber < 1 || userNumber > 100) {
+        result.textContent = "El número debe de estar entre 1 y 100";
+    }
+    else if (userNumber > randomNumber){
+        result.textContent = "Demasiado alto";
+    }
+    else if (userNumber < randomNumber) {
+        result.textContent = "Demasiado bajo";
+    }
+    else {
+        result.textContent = "Has ganado, campeona!"
+    }
 }
+
+
+
 
 
 const handleUpdate = (ev) => {
     ev.preventDefault();
+    checkNumber();
 }
-
-
 
 tryButton.addEventListener("click", handleUpdate);
