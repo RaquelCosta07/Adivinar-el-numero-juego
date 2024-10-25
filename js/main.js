@@ -55,16 +55,16 @@ function checkNumber () {
         result.textContent = "Has ganado, campeona!"
     }
 
-    attemptCount++;
-    counterElement.textContent = `Número de intentos: ${attemptCount}`;
+   
 }
 
-
+const attemptCount = (counterElement = 0);
 
 const handleUpdate = (ev) => {
     ev.preventDefault();
     checkNumber();
-    attemptCount();
+    attemptCount++;
+    counterElement.textContent = `Número de intentos: ${attemptCount}`;
 }
 
 tryButton.addEventListener("click", handleUpdate);
