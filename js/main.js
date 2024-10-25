@@ -17,7 +17,8 @@ quando a usuaria introduza o numero no input e clickar no botao:
         - se, o numero da usuaria (numberInput) for = ao numero aleatorio: mostrar mensagem "Has ganado campeona"
         
 
-
+4-->
+    Elementos: input, numero de intentos field
 
 */
 
@@ -37,7 +38,7 @@ const result = document.querySelector(".js-tips");
 function checkNumber () {
     //recolher o numero que a usuaria coloca no numberInput
     const userNumber = numberInput.value; 
-    //console.log(userNumber);
+    const counterElement = document.querySelector("js-counter");
 
     //si es numero < 1 o > 100
 
@@ -53,15 +54,17 @@ function checkNumber () {
     else {
         result.textContent = "Has ganado, campeona!"
     }
+
+    attemptCount++;
+    counterElement.textContent = `Número de intentos: ${attemptCount}`;
 }
-
-
 
 
 
 const handleUpdate = (ev) => {
     ev.preventDefault();
     checkNumber();
+    attemptCount();
 }
 
 tryButton.addEventListener("click", handleUpdate);
