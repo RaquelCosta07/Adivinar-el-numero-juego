@@ -19,52 +19,67 @@ quando a usuaria introduza o numero no input e clickar no botao:
 
 4-->
     Elementos: input, numero de intentos field
-
+    criar un contador que valha 0
+    Cuando a usuaria faz click en Prueba sumar 1 ao contador
 */
 
 
-function getRandomNumber() {
-    const max = 100
+function getRandomNumber(max) {
     return Math.ceil(Math.random() * max);
 }
 
-const randomNumber = getRandomNumber();
+
+const randomNumber = getRandomNumber(100);
 console.log(randomNumber);
+
+
 
 const numberInput = document.querySelector(".js-number");
 const tryButton = document.querySelector(".js-button");
 const result = document.querySelector(".js-tips");
+const counterElement = document.querySelector("js-counter");
+//variable global para o contador:
+let attempts = 0;
+
+
+//En la funcion manejadora voy a ecribir todas las instrucciones que se ejecutan a raiz del evento (click):
 
 function checkNumber () {
     //recolher o numero que a usuaria coloca no numberInput
-    const userNumber = numberInput.value; 
-    const counterElement = document.querySelector("js-counter");
-
-    //si es numero < 1 o > 100
+    const userNumber = parseInt (numberInput.value); 
+    //el parseInt para que transforme o input de string a numero
+    
 
     if (userNumber < 1 || userNumber > 100) {
         result.textContent = "El número debe de estar entre 1 y 100";
     }
     else if (userNumber > randomNumber){
-        result.textContent = "Demasiado alto";
+        result.textContent = "Pista: Demasiado alto";
     }
     else if (userNumber < randomNumber) {
-        result.textContent = "Demasiado bajo";
+        result.textContent = "Pista: Demasiado bajo";
     }
     else {
         result.textContent = "Has ganado, campeona!"
     }
 
    
+    function setCounter() {
+        // attempts = attempts + 1;
+        // attempts += 1; 
+        attempts ++;
+        counterElement.innerHTML = "Número de intentos: " + attempts; 
+    
+        //counterElement.textContent = `Número de intentos: ${attempts++}`;
+    }
 }
 
-const attemptCount = (counterElement = 0);
 
-const handleUpdate = (ev) => {
+const handleClickButton = (ev) => {
     ev.preventDefault();
     checkNumber();
-    attemptCount++;
-    counterElement.textContent = `Número de intentos: ${attemptCount}`;
+    setCounter();
+   
 }
 
-tryButton.addEventListener("click", handleUpdate);
+tryButton.addEventListener("click", handleClickButton);
